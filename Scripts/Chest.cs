@@ -4,17 +4,55 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour {
 
+    public GameObject lid;
+    public Material[] chestColors = new Material[2]; // change this dependant on type amount
     public Animator anim;
+    private Renderer rendLid;
 
+    private string[] chestType;
+    private string thisChestType;
+    private int selectedType;
+    private int maxChestTypes;
     private bool isOpen;
 
     void Start()
     {
         isOpen = false;
+        maxChestTypes = 2;
+
+        SetupChestTypes(maxChestTypes);
+
+        //Select what color will the chest start off with
+        selectedType = (int)Random.Range(1, maxChestTypes + 1);
+
+        SetChestColor(selectedType);       
     }
 
 	void FixedUpdate () {
-		
+
+        ClickChest();
+	}
+
+    void SetChestColor(int chestTypeGot)
+    {
+        rendLid = lid.GetComponent<Renderer>();
+        
+        rendLid.material = chestColors[chestTypeGot];
+        thisChestType = chestType[chestTypeGot-1];
+
+        Debug.Log("Chest type is: " + thisChestType);
+    }
+
+    void SetupChestTypes(int maxChestTypes)
+    {
+        
+        chestType = new string[maxChestTypes];
+
+        chestType[0] = "Red";
+        chestType[1] = "Blue";
+    }
+    void ClickChest()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -24,11 +62,9 @@ public class Chest : MonoBehaviour {
             {
                 OpenCloseChest();
                 anim.SetTrigger("isLidOpen");
-                Debug.Log("the chest is open?: " + isOpen);
             }
         }
-	}
-
+    }
     void OpenCloseChest()
     {
         if (isOpen == false)
