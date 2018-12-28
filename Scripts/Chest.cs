@@ -76,7 +76,7 @@ public class Chest : MonoBehaviour {
     }
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Item")
+        if (col.gameObject.tag == "Items")
         {
             Destroy(col.gameObject);
             // Score a point here

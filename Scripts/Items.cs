@@ -6,14 +6,26 @@ public class Items : MonoBehaviour {
 
     private Rigidbody rb;
 
+    private string[] itemType;
     private float fallSpeed = 10f; // make it a random range
 
-	void Start () {
+	void Start ()
+    {
+        ItemFall();
+
+        itemType[0] = "Black";
+        itemType[1] = "Red";
+        itemType[2] = "Blue";
+
+    }
+
+    private void ItemFall()
+    {
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0, -1, 0) * fallSpeed;
     }
-	
-	void OnCollisionEnter(Collision col)
+
+    void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.name.Equals("Top"))
         {
