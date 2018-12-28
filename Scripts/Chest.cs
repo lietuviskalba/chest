@@ -39,8 +39,6 @@ public class Chest : MonoBehaviour {
         
         rendLid.material = chestColors[chestTypeGot];
         thisChestType = chestType[chestTypeGot-1];
-
-        Debug.Log("Chest type is: " + thisChestType);
     }
 
     void SetupChestTypes(int maxChestTypes)
@@ -74,6 +72,15 @@ public class Chest : MonoBehaviour {
         else
         {
             isOpen = false;
+        }
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Item")
+        {
+            Destroy(col.gameObject);
+            // Score a point here
+            // Game over here
         }
     }
 }
