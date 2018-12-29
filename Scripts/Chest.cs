@@ -40,7 +40,13 @@ public class Chest : MonoBehaviour {
         rendLid.material = chestColors[chestTypeGot];
         thisChestType = chestType[chestTypeGot-1];
     }
-
+    void DisableChestObject()
+    {
+        if (Score.isGameLost == true || Score.isGameWon == true)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     void SetupChestTypes(int maxChestTypes)
     {
         
@@ -82,13 +88,12 @@ public class Chest : MonoBehaviour {
             if (col.gameObject.GetComponent<Items>().GetItemType().Equals(thisChestType))
             {
                 Score.points += 1;
-                //track here if required item points reached
             }
             else
             {
-                //Add game over text here
-                Debug.Log("GAME OVER");
+                Score.isGameLost = true;
             }
         }
+        DisableChestObject();
     }
 }

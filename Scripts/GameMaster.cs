@@ -7,10 +7,6 @@ public class GameMaster : MonoBehaviour {
     private GameObject[] chests;
     private GameObject[] items;
 
-	void Start () {
-        
-	}
-
     void Update()
     {
         chests = GameObject.FindGameObjectsWithTag("Chests");
