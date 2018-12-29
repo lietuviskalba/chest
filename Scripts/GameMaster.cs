@@ -8,19 +8,23 @@ public class GameMaster : MonoBehaviour {
     private GameObject[] items;
 
 	void Start () {
+        
+	}
 
+    void Update()
+    {
         chests = GameObject.FindGameObjectsWithTag("Chests");
         items = GameObject.FindGameObjectsWithTag("Items");
 
         ShowAllObjects(chests);
         ShowAllObjects(items);
-	}
+    }
 
     void ShowAllObjects(GameObject[] obs)
     {
         foreach (GameObject ob in obs)
         {
-            Debug.Log("ob: --> " + ob);
+            // Debug.Log("ob: --> " + ob);
         }
     }
 }

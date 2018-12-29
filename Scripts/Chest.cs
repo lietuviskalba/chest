@@ -11,7 +11,7 @@ public class Chest : MonoBehaviour {
 
     private string[] chestType;
     private string thisChestType;
-    private int selectedType;
+    private int randType;
     private int maxChestTypes;
     private bool isOpen;
 
@@ -23,9 +23,9 @@ public class Chest : MonoBehaviour {
         SetupChestTypes(maxChestTypes);
 
         //Select what color will the chest start off with
-        selectedType = (int)Random.Range(1, maxChestTypes + 1);
+        randType = (int)Random.Range(1, maxChestTypes + 1);
 
-        SetChestColor(selectedType);       
+        SetChestColor(randType);       
     }
 
 	void FixedUpdate () {
@@ -79,8 +79,16 @@ public class Chest : MonoBehaviour {
         if (col.gameObject.tag == "Items")
         {
             Destroy(col.gameObject);
-            // Score a point here
-            // Game over here
+            if (col.gameObject.GetComponent<Items>().GetItemType().Equals(thisChestType))
+            {
+                Score.points += 1;
+                //track here if required item points reached
+            }
+            else
+            {
+                //Add game over text here
+                Debug.Log("GAME OVER");
+            }
         }
     }
 }
